@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+:root {
+  --gold: #D4AF37;
+  --black: #000000;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background: var(--black);
+  color: var(--white);
+}
+
+/* ✅ FIX: Prevent scroll when menu is open */
+html.menu-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+html.menu-open body {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Smooth transition for overflow changes */
+html {
+  transition: overflow 0.3s ease;
+}
+
+/* Ensure main content doesn't hide behind header */
+main {
+  width: 100%;
+  display: block;
+  margin-top: 0;
+}
+
+/* helper containers */
+.logo-container, .button-container {
+  flex: 0 0 auto;
+  min-width: 120px;
+}
+
+/* ✅ Optimize header rendering - REMOVE contain to prevent menu clipping */
+header {
+  will-change: background-color, border-color;
+}
+
+/* ✅ Optimize animations - GPU acceleration */
+.group-hover\:drop-shadow-\[0_0_15px_rgba\(212\,175\,55\,0\.4\)\] {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* ✅ Prevent layout shift on font loading */
+@font-face {
+  font-family: 'System';
+  src: local('Segoe UI'), local('-apple-system'), local('BlinkMacSystemFont');
+  font-display: swap;
+}
+
+/* ✅ Smooth transitions for interactive elements */
+button, a {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ✅ Improve mobile menu performance */
+@media (max-width: 1024px) {
+  /* Prevent repaints during menu animation */
+  .fixed {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+  
+  /* Optimize overlay rendering */
+  [class*="fixed"][class*="bg-black"] {
+    will-change: opacity;
+  }
+}
+
+/* ✅ Reduce paint on scroll */
+@supports (backdrop-filter: blur(1px)) {
+  header {
+    backdrop-filter: blur(20px);
+  }
+}
+
+/* ✅ Remove scrollbar space to prevent layout shift */
+html.menu-open {
+  scrollbar-gutter: stable;
+}

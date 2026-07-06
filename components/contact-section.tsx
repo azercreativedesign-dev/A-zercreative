@@ -14,12 +14,32 @@ export function ContactSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1200))
-    setIsSubmitting(false)
-    setSubmitStatus("success")
-    setFormState({ name: "", email: "", company: "", service: "", budget: "", message: "" })
-    setTimeout(() => setSubmitStatus("idle"), 5000)
+    setSubmitStatus("idle")
+
+    try {
+      const response = await fetch("https://formspree.io/f/maqgknej", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(formState)
+      })
+
+      if (response.ok) {
+        setSubmitStatus("success")
+        // Reset form inputs after successful submission
+        setFormState({ name: "", email: "", company: "", service: "", budget: "", message: "" })
+      } else {
+        setSubmitStatus("error")
+      }
+    } catch (error) {
+      setSubmitStatus("error")
+    } finally {
+      setIsSubmitting(false)
+      // Keeps the submission result message banner visible for 6 seconds
+      setTimeout(() => setSubmitStatus("idle"), 6000)
+    }
   }
 
   return (
@@ -98,7 +118,6 @@ export function ContactSection() {
               <div className="space-y-5">
                 <label className="text-[10px] font-black text-[#D4AF37] uppercase tracking-widest">{t.capability}</label>
                 <div className="flex flex-wrap gap-3">
-                  {/* Changed t.services to t.serviceList */}
                   {t.serviceList.map((s) => (
                     <button 
                       key={s} type="button"
@@ -143,6 +162,12 @@ export function ContactSection() {
               {submitStatus === "success" && (
                 <div className="mt-6 p-4 bg-[#D4AF37] text-black rounded-xl text-center">
                   <p className="text-xs font-black uppercase tracking-widest">{t.success}</p>
+                </div>
+              )}
+
+              {submitStatus === "error" && (
+                <div className="mt-6 p-4 bg-red-600 text-white rounded-xl text-center">
+                  <p className="text-xs font-black uppercase tracking-widest">✦ TRANSMISSION FAILED. PLEASE TRY AGAIN. ✦</p>
                 </div>
               )}
             </form>

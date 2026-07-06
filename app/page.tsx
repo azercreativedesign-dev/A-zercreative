@@ -211,7 +211,7 @@ function PortfolioContent({ t, lang }: { t: any, lang: string }) {
       title: t.depth || "Depth", 
       tagline: t.depthDesc || "Spatial Identity.", 
       longDesc: lang === 'ET'
-        ? "በአይሶሜትሪክ ትንበያ እና በብርሃን አማካኝነት ባለሁለት-አቅጣጫዊ ገጽታን ማለፍ። ከተመልካቹ ጋር የሚጣጣሙ የአመለካከት ለውጦችን ለመፍጠር የማንነት ስርዓቶችን በ3D አካባቢ ውስጥ ማስቀመጥ።"
+        ? "በአይሶሜትሪክ ትንበያ እና በብርሃን አማካኝነት ባለሁለት-አቅጣጫዊ ገጽታን ማለፍ። ከተመልካቹ ጋር የሚጣጣሙ የአመለካከት ለውጦችን ለመፍጠር የማንነት ስርዓቶችን በ3D አካባቢ ውስጥ ማስቀመጥ。"
         : "Breaking the 2D plane through isometric projection and lighting. Placing identity systems within a controllable 3D environment for perspective shifts that adapt to the viewer.",
       specs: lang === 'ET'
         ? ["አይሶሜትሪክ ካርታ", "የብርሃን አቀራረብ", "የእይታ ማመቻጸት"]
@@ -243,16 +243,12 @@ function PortfolioContent({ t, lang }: { t: any, lang: string }) {
         style={{ background: useTransform([mouseX, mouseY], ([x, y]) => `radial-gradient(800px circle at ${x}px ${y}px, rgba(212, 175, 55, 0.07), transparent 80%)`) }} 
       />
 
-      {/* FIXED PULL-SWITCH SYSTEM 
-         Perfect Desktop & Mobile Realignment:
-         Uses md:left-[48px] on desktop to align exactly centered with the logo node.
-      */}
+      {/* FIXED PULL-SWITCH SYSTEM */}
       <div 
         onTouchStart={handleTouchStart}
         className="fixed top-[74px] left-[24px] md:left-[48px] z-[9999] flex flex-col items-center pointer-events-auto touch-action-none select-none"
       >
         <svg width="32" height="220" className="overflow-visible pointer-events-none">
-          {/* Linked Switch Wire */}
           <motion.line
             x1="16"
             y1="0"
@@ -262,7 +258,6 @@ function PortfolioContent({ t, lang }: { t: any, lang: string }) {
             strokeWidth="2.5"
             opacity="0.85"
           />
-          {/* Drag handle block */}
           <motion.g
             drag="y"
             dragConstraints={{ top: 0, bottom: 90 }}
@@ -272,13 +267,8 @@ function PortfolioContent({ t, lang }: { t: any, lang: string }) {
             className="pointer-events-auto cursor-grab active:cursor-grabbing"
             whileHover={{ scale: 1.1 }}
           >
-            {/* LARGE INVISIBLE HITBOX FOR MOBILE TOUCH INTAKE */}
             <circle cx="16" cy="44" r="28" fill="transparent" className="cursor-pointer" />
-            
-            {/* Visual Outer Handle Ring */}
             <circle cx="16" cy="44" r="14" fill="#050505" stroke="#D4AF37" strokeWidth="2.5" />
-            
-            {/* Center Core Node with Active Pulsing Aura */}
             <motion.circle 
               cx="16" 
               cy="44" 
@@ -305,12 +295,10 @@ function PortfolioContent({ t, lang }: { t: any, lang: string }) {
           transition={{ duration: 1, ease: "easeOut" }}
           className="relative z-10 text-center w-full max-w-[95vw] md:max-w-none"
         >
-          {/* Slender Top Line Spacer */}
           <div className="w-[1.5px] h-8 md:h-28 bg-gradient-to-t from-[#D4AF37] to-transparent mx-auto mb-4 md:mb-10" />
 
           {/* FRAME CONTAINER */}
           <div className="relative p-3 sm:p-10 md:p-24 inline-block w-full">
-            {/* Dynamic Corner Brackets - Stays when isFrameActive is True */}
             <motion.div 
               animate={{ opacity: frameOpacity, scale: frameScale, x: frameOffset, y: frameOffset }}
               transition={{ type: "spring", stiffness: 140, damping: 18 }}
@@ -332,10 +320,6 @@ function PortfolioContent({ t, lang }: { t: any, lang: string }) {
               className="absolute bottom-0 right-0 w-6 md:w-16 h-6 md:h-16 border-b-4 border-r-4 border-[#D4AF37]" 
             />
 
-            {/* CONCEPT TEXT WITH MOTION REACTOR
-               Continues moving smoothly unless frame is locked active.
-               Once locked, it freezes centered, scales slightly, and glows.
-            */}
             <motion.h2 
               animate={isFrameActive ? {
                 x: 0,
@@ -365,7 +349,6 @@ function PortfolioContent({ t, lang }: { t: any, lang: string }) {
             </motion.h2>
 
             <div className="flex items-center justify-center gap-3 md:gap-12">
-              {/* TO TEXT MOTION */}
               <motion.span 
                 animate={isFrameActive ? {
                   x: 0,
@@ -394,7 +377,6 @@ function PortfolioContent({ t, lang }: { t: any, lang: string }) {
 
               <div className="w-[2px] md:w-[3px] h-6 md:h-32 bg-[#D4AF37]" />
 
-              {/* SCREEN TEXT MOTION */}
               <motion.span 
                 animate={isFrameActive ? {
                   x: 0,
@@ -425,7 +407,6 @@ function PortfolioContent({ t, lang }: { t: any, lang: string }) {
             </div>
           </div>
 
-          {/* Action Trigger Node */}
           <div className="mt-8 md:mt-20 flex justify-center pb-2">
              <motion.div 
                animate={{ rotate: 360 }} 
@@ -447,7 +428,6 @@ function PortfolioContent({ t, lang }: { t: any, lang: string }) {
 
       {/* FOOTER SECTION */}
       <section className="py-64 md:py-96 flex flex-col items-center justify-center relative z-30 bg-[#050505] overflow-hidden px-4">
-        {/* LARGE BACKGROUND A-ZER TEXT */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
           <motion.span 
             animate={{ scale: [1, 1.05, 1] }}
@@ -477,8 +457,8 @@ function PortfolioContent({ t, lang }: { t: any, lang: string }) {
           </motion.div>
         </div>
 
-        {/* PERSISTENT SCROLL-GLOW BUTTON */}
-        <div className="relative group cursor-pointer">
+        {/* PERSISTENT SCROLL-GLOW BUTTON LINK TO CONTACT */}
+        <a href="#contact" className="relative group cursor-pointer block rounded-full">
           {/* Outer Dashed Rotating Ring */}
           <motion.div 
             animate={{ rotate: 360 }} 
@@ -486,7 +466,7 @@ function PortfolioContent({ t, lang }: { t: any, lang: string }) {
             className="absolute -inset-10 md:-inset-16 border-4 border-[#D4AF37] rounded-full border-dashed opacity-85 z-10" 
           />
 
-          {/* Absolute Background Glow Aura (Interpolates dynamically on Scroll) */}
+          {/* Absolute Background Glow Aura */}
           <motion.div 
             style={{
               opacity: glowOpacity,
@@ -495,8 +475,8 @@ function PortfolioContent({ t, lang }: { t: any, lang: string }) {
             className="absolute inset-0 bg-[#D4AF37] rounded-full filter blur-[50px] md:blur-[80px] pointer-events-none mix-blend-screen opacity-50 z-0"
           />
 
-          {/* Main Interactive Button */}
-          <motion.button 
+          {/* Main Interactive Motion Layout */}
+          <motion.div 
             style={{
               scale: buttonScrollScale,
             }}
@@ -506,8 +486,8 @@ function PortfolioContent({ t, lang }: { t: any, lang: string }) {
           >
             <span className="mb-2">{t?.getStarted ?? "LAUNCH"}</span>
             <ArrowRight className="w-8 h-8 md:w-12 md:h-12" strokeWidth={4} />
-          </motion.button>
-        </div>
+          </motion.div>
+        </a>
       </section>
 
       <style jsx global>{`
